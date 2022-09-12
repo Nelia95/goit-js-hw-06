@@ -6,21 +6,20 @@ console.log(destroyBtn);
 const inputRef = document.querySelector('input[type="number"]');
 console.log(inputRef);
 
-inputRef.addEventListener('input', event => {
-  console.log(event.currentTarget.value);
-  return event.currentTarget.value;
-});
-const markupRef = [];
-
 function createBoxes() {
+  const markupRef = [];
+
   for (let i = 1; i <= inputRef.value; i += 1) {
-    const markup = `<div style="background-color: ${getRandomHexColor()}; width: ${
-      30 + i * 10
-    }px; height: ${30 + i * 10}px"></div>`;
-    markupRef.push(markup);
-    // console.log(markup);
+    const color = getRandomHexColor();
+    const item = document.createElement('div');
+    item.style.backgroundColor = color;
+    item.style.width = `${i * 10 + 30}px`;
+    item.style.height = `${i * 10 + 30}px`;
+    markupRef.push(item);
   }
+  boxesRef.append(...markupRef);
 }
+
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
@@ -33,5 +32,3 @@ function destroyBoxes() {
 
 createBtn.addEventListener('click', createBoxes);
 destroyBtn.addEventListener('click', destroyBoxes);
-boxesRef.innerHTML = markupRef.join('');
-console.log(markupRef);
